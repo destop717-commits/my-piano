@@ -3,102 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music MinhTruong - Ultimate Theory & Piano</title>
+    <title>Học Viện Âm Nhạc Minh Trường - Master Class</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0f172a; --accent: #fbbf24; --secondary: #6366f1;
-            --bg: #f1f5f9; --card-bg: #ffffff; --text: #1e293b;
-            --white-key: #ffffff; --black-key: #1e293b;
+            --bg: #f8fafc; --card: #ffffff; --text: #1e293b;
+            --italic-font: 'Georgia', serif;
         }
-
         * { box-sizing: border-box; scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--text); line-height: 1.6; }
-
-        header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: white; padding: 50px 20px; text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
-        }
+        header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; padding: 40px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%); }
         header h1 span { color: var(--accent); }
-
-        nav {
-            display: flex; justify-content: center; background: white;
-            position: sticky; top: 0; z-index: 1000; padding: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex-wrap: wrap;
-        }
-        nav button {
-            background: none; border: none; padding: 12px 18px;
-            font-weight: 700; color: var(--primary); cursor: pointer;
-            transition: 0.3s; border-radius: 10px; margin: 2px;
-        }
+        nav { display: flex; justify-content: center; background: white; position: sticky; top: 0; z-index: 1000; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 5px; }
+        nav button { background: none; border: none; padding: 10px 15px; font-weight: 700; color: var(--primary); cursor: pointer; transition: 0.3s; border-radius: 8px; }
         nav button.active { background: var(--primary); color: white; }
-
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
-
-        /* Piano Area */
-        .piano-outer {
-            background: #000; padding: 30px 15px; border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4); margin-bottom: 35px;
-            overflow-x: auto; text-align: center; border: 4px solid #334155;
-        }
-        #game-msg { color: var(--accent); font-weight: bold; margin-bottom: 10px; min-height: 1.5em; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 40px; }
+        .piano-outer { background: #000; padding: 30px 15px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); margin-bottom: 30px; overflow-x: auto; text-align: center; border: 4px solid #334155; }
         .piano { display: flex; position: relative; width: 840px; margin: 10px auto; user-select: none; }
         .key { transition: 0.1s; position: relative; cursor: pointer; }
-        .white-key {
-            width: 70px; height: 250px; background: white;
-            border: 1px solid #d1d5db; border-radius: 0 0 10px 10px;
-            display: flex; align-items: flex-end; justify-content: center;
-            padding-bottom: 15px; font-weight: bold; color: #cbd5e1; z-index: 1;
-        }
+        .white-key { width: 70px; height: 240px; background: white; border: 1px solid #d1d5db; border-radius: 0 0 8px 8px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 15px; font-weight: bold; color: #cbd5e1; z-index: 1; }
         .white-key.active { background: #e2e8f0; transform: translateY(4px); color: var(--primary); }
-        .black-key {
-            width: 46px; height: 150px; background: black;
-            position: absolute; z-index: 2; margin-left: -23px;
-            border-radius: 0 0 6px 6px; color: #64748b; font-size: 11px;
-            display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px;
-        }
-
-        /* Sections */
+        .black-key { width: 46px; height: 140px; background: black; position: absolute; z-index: 2; margin-left: -23px; border-radius: 0 0 6px 6px; color: #64748b; font-size: 11px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; }
         .section { display: none; }
-        .section.active { display: block; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .card { background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; border: 1px solid #eef2f6; }
-        .card h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-bottom: 20px; }
-        
+        .section.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: #fff; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 25px; border: 1px solid #edf2f7; }
+        .card h2 { color: var(--secondary); border-left: 5px solid var(--accent); padding-left: 15px; margin-bottom: 20px; font-size: 1.5rem; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-        .info-box { background: #f8fafc; padding: 20px; border-radius: 12px; border-top: 4px solid var(--secondary); }
-        .info-box h4 { margin: 0 0 10px 0; color: var(--primary); text-transform: uppercase; font-size: 0.9rem; }
-
+        .info-box { background: #f8fafc; padding: 15px; border-radius: 10px; border-top: 3px solid var(--secondary); margin-bottom: 10px; }
+        .info-box h4 { margin: 0 0 8px 0; color: #4338ca; font-family: var(--italic-font); font-style: italic; }
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        td, th { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+        td, th { padding: 12px; border-bottom: 1px solid #f1f5f9; text-align: left; }
         th { background: #f8fafc; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
-
-        .dynamics-symbol { font-family: serif; font-style: italic; font-weight: bold; font-size: 1.4rem; color: #ef4444; }
+        .term { font-family: var(--italic-font); font-weight: 800; color: #ef4444; font-size: 1.1rem; }
+        .practice-tip { background: #fffbeb; border: 1px solid #fef3c7; padding: 15px; border-radius: 10px; margin-top: 10px; }
+        footer { text-align: center; padding: 40px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Music <span>Ultimate</span> Academy</h1>
-    <p>Hệ thống lý thuyết Nhạc lý, Thanh nhạc & Sắc thái âm nhạc toàn diện</p>
+    <h1>Music <span>Master</span> Encyclopedia</h1>
+    <p>Toàn bộ Nhạc lý, Thanh nhạc & Sắc thái biểu đạt</p>
 </header>
 
 <nav>
     <button onclick="showTab('piano-tab')" class="active">🎹 Đàn & Trò Chơi</button>
-    <button onclick="showTab('dynamics-tab')">🎭 Sắc Thái Âm Nhạc</button>
+    <button onclick="showTab('dynamics-tab')">🎭 Sắc Thái & Kỹ Năng</button>
     <button onclick="showTab('vocal-tab')">🎤 Thanh Nhạc Học</button>
-    <button onclick="showTab('theory-tab')">📜 Nhạc Lý Nâng Cao</button>
-    <button onclick="showTab('info-tab')">🧠 Cấu Tạo & Lợi Ích</button>
+    <button onclick="showTab('theory-tab')">📜 Nhạc Lý Chuyên Sâu</button>
 </nav>
 
 <div class="container">
-
     <div id="piano-tab" class="section active">
         <div class="piano-outer">
-            <div id="game-msg">Chào mừng! Bạn có thể chơi đàn hoặc luyện tai nghe tại đây.</div>
-            <button onclick="startEarTest()" style="padding: 10px 20px; cursor:pointer; font-weight:bold; border-radius:8px; border:none; background:var(--secondary); color:white; margin-bottom:15px;">Bắt đầu trò chơi luyện tai</button>
+            <div id="game-msg" style="color:var(--accent); font-weight:bold; margin-bottom:10px;">Luyện tai nghe nhạc viện</div>
+            <button onclick="startEarTest()" style="padding: 10px 20px; cursor:pointer; font-weight:bold; border-radius:8px; border:none; background:var(--secondary); color:white; margin-bottom:15px;">Phát nốt ngẫu nhiên</button>
             <div class="piano">
                 <div class="key white-key" data-note="C" data-freq="261.63">C</div>
                 <div class="key black-key" style="left: 70px;" data-note="C#" data-freq="277.18">C#</div>
@@ -114,130 +75,79 @@
                 <div class="key white-key" data-note="B" data-freq="493.88">B</div>
                 <div class="key white-key" data-note="C5" data-freq="523.25">C5</div>
             </div>
-            <p style="color: #64748b;">Dùng chuột hoặc phím <strong>A-K</strong> để thực hành.</p>
+        </div>
+        <div class="card">
+            <h2>Cấu tạo & Lợi ích</h2>
+            <p>Đàn Piano chuẩn có <strong>88 phím</strong>. Học nhạc giúp phát triển trí não, giảm stress và tăng cường sự tập trung.</p>
         </div>
     </div>
 
     <div id="dynamics-tab" class="section">
         <div class="card">
-            <h2>Sắc thái âm nhạc là gì?</h2>
-            <p>Sắc thái (Dynamics) chỉ mức độ mạnh hay nhẹ của âm thanh trong âm nhạc, giúp biểu đạt cảm xúc và tâm trạng của tác phẩm.</p>
+            <h2>Sắc thái về Lực hát (Dynamics)</h2>
             <table>
-                <tr><th>Ký hiệu</th><th>Thuật ngữ</th><th>Ý nghĩa</th></tr>
-                <tr><td class="dynamics-symbol">pp</td><td>Pianissimo</td><td>Rất khẽ</td></tr>
-                <tr><td class="dynamics-symbol">p</td><td>Piano</td><td>Khẽ</td></tr>
-                <tr><td class="dynamics-symbol">mp</td><td>Mezzo-piano</td><td>Khẽ vừa</td></tr>
-                <tr><td class="dynamics-symbol">mf</td><td>Mezzo-forte</td><td>Mạnh vừa</td></tr>
-                <tr><td class="dynamics-symbol">f</td><td>Forte</td><td>Mạnh</td></tr>
-                <tr><td class="dynamics-symbol">ff</td><td>Fortissimo</td><td>Rất mạnh</td></tr>
+                <tr><th>Kí hiệu</th><th>Thuật ngữ</th><th>Ý nghĩa</th></tr>
+                <tr><td class="term">pp</td><td>Pianissimo</td><td>Rất nhỏ</td></tr>
+                <tr><td class="term">p</td><td>Piano</td><td>Nhỏ vừa</td></tr>
+                <tr><td class="term">mf</td><td>Mezzo forte</td><td>Mạnh vừa</td></tr>
+                <tr><td class="term">f</td><td>Forte</td><td>Mạnh, lớn</td></tr>
+                <tr><td class="term">ff</td><td>Fortissimo</td><td>Rất mạnh, rất lớn</td></tr>
+                <tr><td class="term">sotto voce</td><td>Sotto voce</td><td>Hát thì thầm</td></tr>
+                <tr><td class="term"><</td><td>Crescendo</td><td>Lớn dần</td></tr>
+                <tr><td class="term">></td><td>Decrescendo</td><td>Nhỏ dần</td></tr>
             </table>
         </div>
         <div class="card">
-            <h2>Kỹ thuật diễn tả (Articulation)</h2>
+            <h2>Sắc thái về Trường độ & Cách diễn đạt</h2>
             <div class="grid">
-                <div class="info-box">
-                    <h4>Legato</h4>
-                    <p>Hát hoặc chơi đàn một cách liền mạch, không ngắt quãng giữa các nốt.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Staccato</h4>
-                    <p>Cách đánh nảy, ngắt quãng rõ rệt, nốt nhạc gọn và sắc nét.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Crescendo (<)</h4>
-                    <p>Độ mạnh của âm nhạc tăng dần lên.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Decrescendo (>)</h4>
-                    <p>Độ mạnh của âm nhạc giảm dần đi.</p>
-                </div>
+                <div class="info-box"><h4>Accelerando</h4><p>Tăng tốc dần</p></div>
+                <div class="info-box"><h4>Rallentando</h4><p>Chậm dần lại</p></div>
+                <div class="info-box"><h4>Andante</h4><p>Khoan thai (như bước chân)</p></div>
+                <div class="info-box"><h4>Adagio / Largo</h4><p>Chậm / Rất chậm</p></div>
+                <div class="info-box"><h4>Affectuoso</h4><p>Dịu dàng, tình cảm</p></div>
+                <div class="info-box"><h4>Cantabile</h4><p>Du dương như tiếng hát</p></div>
             </div>
+        </div>
+        <div class="card">
+            <h2>Kỹ năng luyện tập</h2>
+            <div class="practice-tip">👉 <strong>Ghi nhớ:</strong> Đọc và ngẫm nghĩ về sắc thái hàng ngày.</div>
+            <div class="practice-tip">👉 <strong>Kỹ thuật:</strong> Chắc hơi thở, lực hát, độ vang trước khi biểu cảm.</div>
+            <div class="practice-tip">👉 <strong>Cảm xúc:</strong> Phải nhập tâm vào cái "hồn" của sắc thái đó.</div>
         </div>
     </div>
 
     <div id="vocal-tab" class="section">
         <div class="card">
-            <h2>Lý thuyết Thanh nhạc Chuyên sâu</h2>
+            <h2>Lý thuyết Thanh nhạc</h2>
             <div class="grid">
-                <div class="info-box">
-                    <h4>Cơ chế hơi thở Appoggio</h4>
-                    <p>Sử dụng cơ hoành và cơ liên sườn để nén và điều tiết luồng hơi bền bỉ, giúp hát câu dài mà không mệt.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Điểm chuyển giọng (Passaggio)</h4>
-                    <p>Điểm giao thoa giữa giọng ngực và giọng đầu. Kỹ thuật "Mixed Voice" giúp xóa nhòa ranh giới này.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Khoảng vang (Resonance)</h4>
-                    <p>Âm thanh được khuếch đại tự nhiên qua khoang miệng, khoang mũi và các xoang mặt.</p>
-                </div>
+                <div class="info-box"><h4>Appoggio</h4><p>Điểm tựa hơi thở tại cơ hoành.</p></div>
+                <div class="info-box"><h4>Passaggio</h4><p>Điểm chuyển giữa giọng ngực và giọng đầu.</p></div>
+                <div class="info-box"><h4>Resonance</h4><p>Khoảng vang xoang mặt và vòm họng.</p></div>
             </div>
         </div>
         <div class="card">
-            <h2>Phân loại Giọng hát</h2>
-            <table>
-                <tr><th>Loại giọng</th><th>Tên gọi</th><th>Đặc điểm</th></tr>
-                <tr><td>Nữ cao</td><td>Soprano</td><td>Vang, sáng, chinh phục các nốt cao chót vót.</td></tr>
-                <tr><td>Nữ trung</td><td>Mezzo-Soprano</td><td>Dày, ấm áp, có độ nặng ở trung âm.</td></tr>
-                <tr><td>Nam cao</td><td>Tenor</td><td>Sáng, linh hoạt, giọng nam cao nhất.</td></tr>
-                <tr><td>Nam trung</td><td>Baritone</td><td>Phổ biến nhất, cân bằng giữa độ dày và độ cao.</td></tr>
-            </table>
+            <h2>Phân loại giọng</h2>
+            <p>Soprano (Nữ cao), Alto (Nữ trầm), Tenor (Nam cao), Baritone (Nam trung), Bass (Nam trầm).</p>
         </div>
     </div>
 
     <div id="theory-tab" class="section">
         <div class="card">
-            <h2>Vòng Tròn Bậc 5 (Circle of Fifths)</h2>
-            <p>Quy luật xác định giọng và các dấu hóa (#/b) trên bản nhạc:</p>
-            <ul>
-                <li><strong>Chiều kim đồng hồ (Quãng 5):</strong> C -> G(1#) -> D(2#) -> A(3#) -> E(4#).</li>
-                <li><strong>Ngược kim đồng hồ (Quãng 4):</strong> C -> F(1b) -> Bb(2b) -> Eb(3b) -> Ab(4b).</li>
-            </ul>
-        </div>
-        <div class="card">
-            <h2>Âm giai & Quãng (Intervals)</h2>
+            <h2>Nhạc lý chuyên sâu</h2>
             <div class="grid">
-                <div class="info-box">
-                    <h4>Major Scale</h4>
-                    <p>Công thức: 1 - 1 - 1/2 - 1 - 1 - 1 - 1/2. Cảm giác tươi vui.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Minor Scale</h4>
-                    <p>Cảm giác buồn bã, u tối, thường dùng trong nhạc trữ tình.</p>
-                </div>
-                <div class="info-box">
-                    <h4>Quãng Tritone</h4>
-                    <p>Quãng 4 tăng, âm thanh gây cảm giác bất an, đòi hỏi sự giải quyết.</p>
-                </div>
+                <div class="info-box"><h4>Vòng tròn bậc 5</h4><p>Xác định giọng và dấu hóa (#/b).</p></div>
+                <div class="info-box"><h4>Âm giai Trưởng</h4><p>Công thức: 1-1-1/2-1-1-1-1/2.</p></div>
+                <div class="info-box"><h4>Quãng Tritone</h4><p>Quãng của quỷ (3 cung), đầy kịch tính.</p></div>
             </div>
         </div>
     </div>
-
-    <div id="info-tab" class="section">
-        <div class="card">
-            <h2>Đàn Piano có bao nhiêu phím?</h2>
-            <p>Một cây đàn chuẩn có <strong>88 phím</strong> (52 trắng, 36 đen). Chúng được chia thành khoảng 7 quãng tám rưỡi.</p>
-        </div>
-        <div class="card">
-            <h2>Lợi ích của việc học nhạc</h2>
-            <div class="grid">
-                <div class="info-box"><h4>🧠 Trí não</h4><p>Tăng cường kết nối giữa hai bán cầu não, cải thiện trí nhớ.</p></div>
-                <div class="info-box"><h4>🧘 Tâm lý</h4><p>Giảm stress, kiểm soát cảm xúc tốt hơn thông qua giai điệu.</p></div>
-                <div class="info-box"><h4>🎯 Tập trung</h4><p>Rèn luyện sự kiên trì và khả năng tập trung cao độ.</p></div>
-            </div>
-        </div>
-    </div>
-
 </div>
 
-<footer>
-    <p>&copy; 2026 Music Academy Pro | Toàn bộ kiến thức âm nhạc của bạn</p>
-</footer>
+<footer>&copy; 2026 Music Master Academy</footer>
 
 <script>
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     let targetNote = null;
-
     function playNote(freq) {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -248,58 +158,34 @@
         osc.connect(gain); gain.connect(audioCtx.destination);
         osc.start(); osc.stop(audioCtx.currentTime + 1);
     }
-
     function startEarTest() {
         const keys = document.querySelectorAll('.key');
         const randomKey = keys[Math.floor(Math.random() * keys.length)];
         targetNote = randomKey.dataset.note;
         playNote(randomKey.dataset.freq);
-        document.getElementById('game-msg').innerText = "Đang phát... Hãy bấm nốt bạn nghe thấy!";
-        document.getElementById('game-msg').style.color = "#fbbf24";
+        document.getElementById('game-msg').innerText = "Đang phát... Bấm nốt bạn vừa nghe!";
     }
-
     document.querySelectorAll('.key').forEach(key => {
         key.addEventListener('mousedown', () => {
             playNote(key.dataset.freq);
             key.classList.add('active');
             if (targetNote) {
                 if (key.dataset.note === targetNote) {
-                    document.getElementById('game-msg').innerText = "Chính xác! Chúc mừng bạn 🎉";
-                    document.getElementById('game-msg').style.color = "#22c55e";
+                    document.getElementById('game-msg').innerText = "Chính xác! 🎉";
                     targetNote = null;
                 } else {
-                    document.getElementById('game-msg').innerText = "Chưa đúng, thử lại nhé! ❌";
-                    document.getElementById('game-msg').style.color = "#ef4444";
+                    document.getElementById('game-msg').innerText = "Thử lại nào ❌";
                 }
             }
         });
         key.addEventListener('mouseup', () => key.classList.remove('active'));
     });
-
     function showTab(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
         document.getElementById(id).classList.add('active');
-        // Get the button that was clicked
         event.currentTarget.classList.add('active');
     }
-
-    const keyMap = {'a':261.63,'w':277.18,'s':293.66,'e':311.13,'d':329.63,'f':349.23,'t':369.99,'g':392.00,'y':415.30,'h':440.00,'u':466.16,'j':493.88,'k':523.25};
-    window.addEventListener('keydown', e => {
-        const freq = keyMap[e.key.toLowerCase()];
-        if(freq) {
-            playNote(freq);
-            const el = document.querySelector(`[data-freq="${freq}"]`);
-            if(el) el.classList.add('active');
-        }
-    });
-    window.addEventListener('keyup', e => {
-        const freq = keyMap[e.key.toLowerCase()];
-        if(freq) {
-            const el = document.querySelector(`[data-freq="${freq}"]`);
-            if(el) el.classList.remove('active');
-        }
-    });
 </script>
 </body>
 </html>

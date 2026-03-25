@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piano Masterclass - Virtual Keyboard</title>
+<style>
+:root {
+--primary: #1a1a1a;
+--accent: #d4af37;
+--bg: #f4f4f4;
+--white-key: #ffffff;
+--black-key: #333;
+}
+
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); }
+header { background: var(--primary); color: var(--accent); padding: 2rem; text-align: center; border-bottom: 4px solid var(--accent); }
+
+nav { display: flex; justify-content: center; background: #222; position: sticky; top: 0; z-index: 1000; }
+nav button { background: none; border: none; color: white; padding: 1rem 1.5rem; cursor: pointer; font-weight: bold; transition: 0.3s; }
+nav button.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+.container { max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+.section { display: none; animation: fadeIn 0.5s; }
+.section.active { display: block; }
+
+/* STYLE BÀN PHÍM PIANO */
+.piano-container {
+display: flex;
+justify-content: center;
+background: #222;
+padding: 40px 20px;
+border-radius: 10px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+margin: 2rem 0;
+overflow-x: auto;
+}
+
+.piano { display: flex; position: relative; }
+
+.key {
+position: relative;
+cursor: pointer;
+text-transform: uppercase;
+}
+
+.white-key {
+width: 60px;
+height: 200px;
+background: var(--white-key);
+border: 1px solid #ccc;
+border-radius: 0 0 5px 5px;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+padding-bottom: 10px;
+font-weight: bold;
+z-index: 1;
+}
+
+.white-key:active, .white-key.active { background: #e0e0e0; box-shadow: inset 0 5px 10px rgba(0,0,0,0.2); }
+
+.black-key {
+width: 40px;
+height: 120px;
+background: var(--black-key);
+color: white;
+position: absolute;
+z-index: 2;
+margin-left: -20px;
+border-radius: 0 0 3px 3px;
+display: flex;
+align-items: flex-end;
+justify-content: center;
+padding-bottom: 5px;
+font-size: 0.8rem;
+}
+
+.black-key:active, .black-key.active { background: #555; }
+
+/* TABLE & BOX */
+.box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 1rem; }
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+table th, table td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+table th { background: var(--primary); color: white; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</head>
+<body>
+
+<header>
+<h1>HỌC PIANO TRỰC TUYẾN</h1>
+<p>Lý thuyết tổng hợp & Bàn phím tương tác</p>
+</header>
+
+<nav id="navbar">
+<button onclick="showPage('keyboard-tab')" class="active">Bàn phím ảo</button>
+<button onclick="showPage('theory-tab')">Lý thuyết & Sắc thái</button>
+<button onclick="showPage('vocal-tab')">Thanh nhạc</button>
+</nav>
+
+<div class="container">
+
+<div id="keyboard-tab" class="section active">
+<h2>Bàn phím tương tác</h2>
+<p>Click vào các phím để thử âm thanh và làm quen với vị trí nốt nhạc (Quãng C4 - C5).</p>
+
+<div class="piano-container">
+<div class="piano">
+<div class="key white-key" onclick="playNote(261.63, 'C')">C</div>
+<div class="key black-key" style="left: 60px;" onclick="playNote(277.18, 'C#')">C#</div>
+<div class="key white-key" onclick="playNote(293.66, 'D')">D</div>
+<div class="key black-key" style="left: 120px;" onclick="playNote(311.13, 'D#')">D#</div>
+<div class="key white-key" onclick="playNote(329.63, 'E')">E</div>
+
+<div class="key white-key" onclick="playNote(349.23, 'F')">F</div>
+<div class="key black-key" style="left: 240px;" onclick="playNote(369.99, 'F#')">F#</div>
+<div class="key white-key" onclick="playNote(392.00, 'G')">G</div>
+<div class="key black-key" style="left: 300px;" onclick="playNote(415.30, 'G#')">G#</div>
+<div class="key white-key" onclick="playNote(440.00, 'A')">A</div>
+<div class="key black-key" style="left: 360px;" onclick="playNote(466.16, 'A#')">A#</div>
+<div class="key white-key" onclick="playNote(493.88, 'B')">B</div>
+<div class="key white-key" onclick="playNote(523.25, 'C2')">C</div>
+</div>
+</div>
+<p style="text-align: center; color: #666;">* Lưu ý: Âm thanh được mô phỏng bằng tần số sóng điện tử (Web Audio API).</p>
+</div>
+
+<div id="theory-tab" class="section">
+<div class="box">
+<h2>Ký hiệu sắc thái & Tốc độ</h2>
+<table>
+<tr><th>Ký hiệu</th><th>Ý nghĩa</th><th>Loại</th></tr>
+<tr><td><b>p</b> (Piano)</td><td>Nhỏ</td><td>Cường độ</td></tr>
+<tr><td><b>f</b> (Forte)</td><td>Mạnh / To</td><td>Cường độ</td></tr>
+<tr><td><b>rit.</b></td><td>Chậm dần</td><td>Tốc độ</td></tr>
+<tr><td><b>Staccato</b></td><td>Đánh nẩy nốt</td><td>Kỹ thuật</td></tr>
+<tr><td><b>Legato</b></td><td>Đánh liền tiếng</td><td>Kỹ thuật</td></tr>
+</table>
+</div>
+</div>
+
+<div id="vocal-tab" class="section">
+<div class="box">
+<h2>Kiến thức bổ trợ Thanh nhạc</h2>
+<ul>
+<li><strong>Khởi động giọng (Warm-up):</strong> Rung môi, luyện âm "Mi-Ma-Mo".</li>
+<li><strong>Cộng hưởng:</strong> Đưa âm thanh lên "mặt nạ" (hốc mũi, trán).</li>
+<li><strong>Quãng giọng:</strong> Piano giúp bạn xác định Note thấp nhất và cao nhất bạn có thể hát.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<script>
+// Chuyển Tab
+function showPage(id) {
+document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+document.querySelectorAll('#navbar button').forEach(b => b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+event.currentTarget.classList.add('active');
+}
+
+// Logic phát âm thanh
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playNote(frequency, noteName) {
+const oscillator = audioCtx.createOscillator();
+const gainNode = audioCtx.createGain();
+
+oscillator.type = 'sine'; // Kiểu âm thanh (sine, square, sawtooth, triangle)
+oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+
+gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+
+oscillator.connect(gainNode);
+gainNode.connect(audioCtx.destination);
+
+oscillator.start();
+oscillator.stop(audioCtx.currentTime + 1);
+
+console.log("Playing note: " + noteName);
+}
+</script>
+
+</body>
+</html>

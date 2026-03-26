@@ -82,6 +82,73 @@
             <p>Đàn Piano chuẩn có <strong>88 phím</strong>. Việc học đàn giúp tăng cường kết nối giữa hai bán cầu não và rèn luyện tính kiên nhẫn.</p>
         </div>
     </div>
+    <script>
+// ===== PIANO LEARNING ASSISTANT (JS VERSION) =====
+class PianoLearningAssistant {
+    constructor() {
+        this.notes = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si'];
+
+        this.line_notes = ['Mi', 'Sol', 'Si', 'Re', 'Fa'];
+        this.space_notes = ['Fa', 'La', 'Do', 'Mi'];
+    }
+
+    learnTheory() {
+        let output = "=== BƯỚC 1: NỐT TRÊN DÒNG ===\n";
+        this.line_notes.forEach((note, i) => {
+            let distance = i > 0 ? "Cách 1 phím trắng" : "Nốt bắt đầu";
+            output += `Dòng ${i+1}: ${note} -> ${distance}\n`;
+        });
+
+        output += "\n=== BƯỚC 2: NỐT TRONG KHE ===\n";
+        this.space_notes.forEach((note, i) => {
+            let distance = i > 0 ? "Cách 1 phím trắng" : "Nốt bắt đầu";
+            output += `Khe ${i+1}: ${note} -> ${distance}\n`;
+        });
+
+        return output;
+    }
+
+    moveFinger(current, next) {
+        let start = this.notes.indexOf(current);
+        let end = this.notes.indexOf(next);
+
+        if (start === -1 || end === -1) {
+            return "❌ Nốt không hợp lệ!";
+        }
+
+        let steps = end - start;
+
+        let result = `\n[Phân tích]\n${current} → ${next}\n`;
+
+        if (steps > 0) {
+            result += `👉 Đi LÊN ${steps} phím`;
+        } else if (steps < 0) {
+            result += `👉 Đi XUỐNG ${Math.abs(steps)} phím`;
+        } else {
+            result += "👉 Giữ nguyên";
+        }
+
+        return result;
+    }
+}
+
+// ===== KẾT NỐI VỚI UI =====
+const pianoAI = new PianoLearningAssistant();
+
+// Hiển thị lý thuyết
+function showTheory() {
+    alert(pianoAI.learnTheory());
+}
+
+// Test di chuyển
+function testMove() {
+    let from = prompt("Nhập nốt hiện tại (Do, Re, Mi...)");
+    let to = prompt("Nhập nốt tiếp theo");
+
+    let result = pianoAI.moveFinger(from, to);
+    alert(result);
+}
+</script>
 
     <div id="dynamics-tab" class="section">
         <div class="card">

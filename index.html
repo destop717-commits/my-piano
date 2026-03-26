@@ -201,6 +201,157 @@ let b=prompt("Nốt 2");
 alert(ai.moveFinger(a,b));
 }
 </script>
+  <!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Master PRO</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+body { font-family: Inter; background:#0f172a; color:white; text-align:center; }
+.piano { display:flex; position:relative; width:840px; margin:auto; }
+.white { width:70px; height:220px; background:white; color:black; }
+.black { width:40px; height:130px; background:black; position:absolute; margin-left:-20px; color:white; }
+button { margin:5px; padding:10px; border:none; border-radius:8px; cursor:pointer; }
+#noteDisplay { font-size:24px; margin:10px; }
+</style>
+</head>
+
+<body>
+
+<h1>🎹 Music Master PRO</h1>
+
+<div id="noteDisplay">Chưa bấm nốt</div>
+
+<button onclick="startGame()">🎧 Game nghe nốt</button>
+<button onclick="showTheory()">📘 Lý thuyết</button>
+<button onclick="testMove()">🎯 Test ngón</button>
+<button onclick="detectChord()">🎹 Nhận diện hợp âm</button>
+
+<p>Điểm: <span id="score">0</span></p>
+
+<div class="piano" id="piano"></div>
+
+<script>
+// TẠO PIANO
+const notes = [
+["C",261],["C#",277],["D",293],["D#",311],["E",329],
+["F",349],["F#",369],["G",392],["G#",415],
+["A",440],["A#",466],["B",493],["C5",523]
+];
+
+const piano = document.getElementById("piano");
+
+notes.forEach((n,i)=>{
+let key=document.createElement("div");
+key.className = n[0].includes("#")?"black":"white";
+key.innerText=n[0];
+key.dataset.note=n[0];
+key.dataset.freq=n[1];
+
+if(n[0].includes("#")){
+key.style.left=(i*70)+"px";
+}
+
+piano.appendChild(key);
+});
+
+// AUDIO
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+
+function play(freq){
+ctx.resume();
+let o=ctx.createOscillator();
+let g=ctx.createGain();
+o.frequency.value=freq;
+o.connect(g); g.connect(ctx.destination);
+o.start(); o.stop(ctx.currentTime+1);
+}
+
+// GAME
+let target=null;
+let score=0;
+
+function startGame(){
+target=notes[Math.floor(Math.random()*notes.length)][0];
+play(notes.find(n=>n[0]==target)[1]);
+}
+
+document.querySelectorAll(".white,.black").forEach(k=>{
+k.addEventListener("click",()=>{
+let note=k.dataset.note;
+play(k.dataset.freq);
+
+document.getElementById("noteDisplay").innerText="Bạn bấm: "+note;
+
+if(target){
+if(note===target){
+score++;
+document.getElementById("score").innerText=score;
+alert("Đúng!");
+}else{
+alert("Sai! Đáp án: "+target);
+}
+target=null;
+}
+});
+});
+
+// AI
+class AI{
+constructor(){
+this.notes=["Do","Re","Mi","Fa","Sol","La","Si"];
+}
+
+learn(){
+return "Do Re Mi Fa Sol La Si";
+}
+
+move(a,b){
+let s=this.notes.indexOf(a);
+let e=this.notes.indexOf(b);
+if(s<0||e<0) return "Sai";
+return e>s?"Lên":"Xuống";
+}
+}
+
+const ai=new AI();
+
+function showTheory(){
+alert(ai.learn());
+}
+
+function testMove(){
+let a=prompt("Nốt 1");
+let b=prompt("Nốt 2");
+alert(ai.move(a,b));
+}
+
+// CHORD
+let pressed=[];
+
+document.querySelectorAll(".white,.black").forEach(k=>{
+k.addEventListener("mousedown",()=>{
+pressed.push(k.dataset.note);
+});
+});
+
+function detectChord(){
+if(pressed.includes("C")&&pressed.includes("E")&&pressed.includes("G")){
+alert("Hợp âm C Major");
+}else{
+alert("Chưa nhận diện được");
+}
+pressed=[];
+}
+</script>
+
+</body>
+</html>
+  
 
 </body>
 </html>

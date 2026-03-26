@@ -146,7 +146,21 @@
                     <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto text-xl">
                         <i class="fas fa-vial"></i>
                     </div>
-                    
+                    <h3 class="font-bold text-lg mb-2">Kỹ Thuật Nâng Cao</h3>
+                    <p class="text-sm text-slate-500">Âm thức Hy Lạp, đối điểm và ly điệu.</p>
+                </div>
+
+                <div onclick="showSection('history')" class="nav-card bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                    <div class="w-14 h-14 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center mb-6 mx-auto text-xl">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Lịch Sử & Nhạc Cụ</h3>
+                    <p class="text-sm text-slate-500">Các thời kỳ âm nhạc vĩ đại và cấu tạo dàn nhạc.</p>
+                </div>
+
+                <div onclick="showSection('piano')" class="nav-card bg-white p-8 rounded-3xl border border-slate-100 shadow-sm">
+                    <div class="w-14 h-14 bg-slate-100 text-slate-600 rounded-2xl flex items-center justify-center mb-6 mx-auto text-xl">
+                        <i class="fas fa-keyboard"></i>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Thực Hành Piano</h3>
                     <p class="text-sm text-slate-500">Sử dụng bàn phím ảo để thực hành các nốt nhạc.</p>
@@ -452,7 +466,55 @@
             </div>
         </section>
 
-       
+        <!-- MỤC 4: NÂNG CAO -->
+        <section id="advanced" class="content-section">
+            <button onclick="showSection('intro')" class="mb-8 text-indigo-600 font-bold flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+            <h2 class="text-4xl font-black mb-8 serif">IV. Kiến Thức Nâng Cao</h2>
+            <div class="bg-slate-900 text-white p-10 rounded-3xl shadow-xl">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-indigo-400">Âm Thức (Modes)</h3>
+                        <p class="text-slate-400 text-sm mb-6 leading-relaxed">Sử dụng các âm giai cổ Hy Lạp để tạo ra cảm xúc đặc biệt mà âm giai Trưởng/Thứ không làm được:</p>
+                        <ul class="space-y-3 text-sm">
+                            <li><b class="text-white">Dorian:</b> Phong cách Jazz, huyền bí.</li>
+                            <li><b class="text-white">Lydian:</b> Bay bổng, mang âm hưởng điện ảnh.</li>
+                            <li><b class="text-white">Phrygian:</b> Âm hưởng Tây Ban Nha, kịch tính.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-indigo-400">Kỹ thuật viết nhạc</h3>
+                        <ul class="space-y-4 text-sm text-slate-400">
+                            <li><b class="text-white">Counterpoint (Đối điểm):</b> Kỹ thuật viết nhiều giai điệu độc lập cùng vang lên một lúc nhưng hòa quyện.</li>
+                            <li><b class="text-white">Modulation (Ly điệu):</b> Quá trình thay đổi tông nhạc chính giữa bài để tạo cao trào.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MỤC 5: LỊCH SỬ -->
+        <section id="history" class="content-section">
+            <button onclick="showSection('intro')" class="mb-8 text-indigo-600 font-bold flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </button>
+            <h2 class="text-4xl font-black mb-8 serif">V. Lịch Sử Âm Nhạc</h2>
+            <div class="space-y-6">
+                <div class="p-6 border-l-4 border-indigo-500 bg-white shadow-sm rounded-r-xl">
+                    <h4 class="font-bold text-lg">Thời kỳ Baroque (1600-1750)</h4>
+                    <p class="text-sm text-slate-500 mt-2">Đặc trưng bởi sự phức điệu (Polyphony). Nhạc sĩ tiêu biểu: J.S. Bach, Vivaldi.</p>
+                </div>
+                <div class="p-6 border-l-4 border-blue-500 bg-white shadow-sm rounded-r-xl">
+                    <h4 class="font-bold text-lg">Thời kỳ Cổ Điển (1750-1820)</h4>
+                    <p class="text-sm text-slate-500 mt-2">Sự cân bằng và cấu trúc Sonata. Nhạc sĩ tiêu biểu: Mozart, Haydn, Beethoven.</p>
+                </div>
+                <div class="p-6 border-l-4 border-rose-500 bg-white shadow-sm rounded-r-xl">
+                    <h4 class="font-bold text-lg">Thời kỳ Lãng Mạn (1820-1910)</h4>
+                    <p class="text-sm text-slate-500 mt-2">Cảm xúc mãnh liệt và tự do cá nhân. Nhạc sĩ tiêu biểu: Chopin, Tchaikovsky, Liszt.</p>
+                </div>
+            </div>
+        </section>
 
         <!-- MỤC PHỤ: PIANO -->
         <section id="piano" class="content-section">

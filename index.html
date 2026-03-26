@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Viện Âm Nhạc Minh Trường - Master Class v7.0</title>
+    <title>Học Viện Âm Nhạc Toàn Diện - Master Class v7.0</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -38,7 +38,7 @@
         th { background: #f8fafc; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
         .term { font-family: var(--italic-font); font-weight: 800; color: #ef4444; font-size: 1.1rem; }
         .example { background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-weight: bold; }
-        .practice-tip { background: #fffbeb; border: 1px solid #fef3c7; padding: 15px; border-radius: 10px; margin-top: 10px; }
+        .btn-ai { padding: 10px 15px; cursor: pointer; font-weight: bold; border-radius: 8px; border: none; background: var(--accent); color: var(--primary); margin: 5px; }
         footer { text-align: center; padding: 40px; color: #94a3b8; }
     </style>
 </head>
@@ -46,25 +46,38 @@
 
 <header>
     <h1>Music <span>Master</span> Encyclopedia</h1>
-    <p>Kho lưu trữ Nhạc lý, Thanh nhạc & Sắc thái (Bản đầy đủ nhất)</p>
+    <p>Kho lưu trữ Nhạc lý, Thanh nhạc & Sắc thái</p>
 </header>
 
 <nav>
     <button onclick="showTab('piano-tab', this)" class="active">🎹 Đàn & Trò Chơi</button>
-    <button onclick="showTab('dynamics-tab')">🎭 Sắc Thái & Kỹ Năng</button>
-    <button onclick="showTab('vocal-tab')">🎤 Thanh Nhạc Học</button>
-    <button onclick="showTab('theory-tab')">📜 Nhạc Lý Chuyên Sâu</button>
+    <button onclick="showTab('dynamics-tab', this)">🎭 Sắc Thái & Kỹ Năng</button>
+    <button onclick="showTab('vocal-tab', this)">🎤 Thanh Nhạc Học</button>
+    <button onclick="showTab('theory-tab', this)">📜 Nhạc Lý Chuyên Sâu</button>
 </nav>
 
 <div class="container">
     <div id="piano-tab" class="section active">
         <div class="piano-outer">
-            <div id="game-msg" style="color:var(--accent); font-weight:bold; margin-bottom:10px;">Luyện tai nghe nhạc viện</div>
-            <button onclick="startEarTest()" style="padding: 10px 20px; cursor:pointer; font-weight:bold; border-radius:8px; border:none; background:var(--secondary); color:white; margin-bottom:15px;">Phát nốt ngẫu nhiên</button>
+            <div id="game-msg" style="color:var(--accent); font-weight:bold; margin-bottom:10px;">Luyện tai nghe & Phương pháp AI</div>
+            <button class="btn-ai" style="background: var(--secondary); color: white;" onclick="startEarTest()">Phát nốt ngẫu nhiên</button>
+            <button class="btn-ai" onclick="showTheory()">📘 Lý thuyết Dòng/Khe</button>
+            <button class="btn-ai" onclick="testMove()">🎯 Test di chuyển ngón</button>
 
-<br>
-<button onclick="showTheory()">📘 Học lý thuyết</button>
-<button onclick="testMove()">🎯 Test đọc nốt</button>
+            <div class="piano">
+                <div class="key white-key" data-note="C" data-freq="261.63">C</div>
+                <div class="key black-key" style="left: 70px;" data-note="C#" data-freq="277.18">C#</div>
+                <div class="key white-key" data-note="D" data-freq="293.66">D</div>
+                <div class="key black-key" style="left: 140px;" data-note="D#" data-freq="311.13">D#</div>
+                <div class="key white-key" data-note="E" data-freq="329.63">E</div>
+                <div class="key white-key" data-note="F" data-freq="349.23">F</div>
+                <div class="key black-key" style="left: 280px;" data-note="F#" data-freq="369.99">F#</div>
+                <div class="key white-key" data-note="G" data-freq="392.00">G</div>
+                <div class="key black-key" style="left: 350px;" data-note="G#" data-freq="415.30">G#</div>
+                <div class="key white-key" data-note="A" data-freq="440.00">A</div>
+                <div class="key black-key" style="left: 420px;" data-note="A#" data-freq="466.16">A#</div>
+                <div class="key white-key" data-note="B" data-freq="493.88">B</div>
+                <div class="key white-key" data-note="C5" data-freq="523.25">C5</div>
             </div>
         </div>
         <div class="card">
@@ -72,251 +85,106 @@
             <p>Đàn Piano chuẩn có <strong>88 phím</strong>. Việc học đàn giúp tăng cường kết nối giữa hai bán cầu não và rèn luyện tính kiên nhẫn.</p>
         </div>
     </div>
-    <script>
+
+    <div id="dynamics-tab" class="section">
+        <div class="card"><h2>Sắc thái về Lực hát (Dynamics)</h2><p>Nội dung về Pianissimo, Forte...</p></div>
+    </div>
+    <div id="vocal-tab" class="section">
+        <div class="card"><h2>Thanh nhạc chuyên sâu</h2><p>Nội dung về Appoggio, Passaggio...</p></div>
+    </div>
+    <div id="theory-tab" class="section">
+        <div class="card"><h2>Nhạc Lý Chuyên Sâu</h2><p>Vòng tròn bậc 5, Âm giai...</p></div>
+    </div>
+</div>
+
+<footer>&copy; 2026 Music Master Academy</footer>
+
 <script>
+// --- PHẦN 1: AUDIO & GAME TAI NGHE ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 let targetNote = null;
 
 function playNote(freq) {
-audioCtx.resume();
-const osc = audioCtx.createOscillator();
-const gain = audioCtx.createGain();
-osc.type = 'triangle';
-osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
-osc.connect(gain); gain.connect(audioCtx.destination);
-osc.start(); osc.stop(audioCtx.currentTime + 1);
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(); osc.stop(audioCtx.currentTime + 1);
 }
 
 function startEarTest() {
-const keys = document.querySelectorAll('.key');
-const randomKey = keys[Math.floor(Math.random() * keys.length)];
-targetNote = randomKey.dataset.note;
-playNote(randomKey.dataset.freq);
-document.getElementById('game-msg').innerText = "Đang phát... Bấm nốt bạn vừa nghe!";
+    const keys = document.querySelectorAll('.key');
+    const randomKey = keys[Math.floor(Math.random() * keys.length)];
+    targetNote = randomKey.dataset.note;
+    playNote(randomKey.dataset.freq);
+    document.getElementById('game-msg').innerText = "Đang phát... Hãy bấm phím bạn vừa nghe!";
 }
 
 document.querySelectorAll('.key').forEach(key => {
-key.addEventListener('mousedown', () => {
-playNote(key.dataset.freq);
-key.classList.add('active');
-
-if (targetNote) {
-if (key.dataset.note === targetNote) {
-document.getElementById('game-msg').innerText = "Chính xác! 🎉";
-targetNote = null;
-} else {
-document.getElementById('game-msg').innerText = "Sai rồi! ❌ Đáp án: " + targetNote;
-}
-}
+    key.addEventListener('mousedown', () => {
+        playNote(key.dataset.freq);
+        key.classList.add('active');
+        if (targetNote) {
+            if (key.dataset.note === targetNote) {
+                document.getElementById('game-msg').innerText = "Chính xác! 🎉";
+                targetNote = null;
+            } else {
+                document.getElementById('game-msg').innerText = "Sai rồi! Thử lại ❌";
+            }
+        }
+    });
+    key.addEventListener('mouseup', () => key.classList.remove('active'));
 });
 
-key.addEventListener('mouseup', () => key.classList.remove('active'));
-});
-
-// ===== FIX TAB =====
-function showTab(id, el) {
-document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-el.classList.add('active');
-}
-</script>
-
-<script>
-// ===== PIANO AI =====
+// --- PHẦN 2: PIANO AI LOGIC ---
 class PianoLearningAssistant {
-constructor() {
-this.notes = ['Do', 'Re', 'Mi', 'Fa', 'Sol', 'La', 'Si'];
-this.line_notes = ['Mi', 'Sol', 'Si', 'Re', 'Fa'];
-this.space_notes = ['Fa', 'La', 'Do', 'Mi'];
-}
+    constructor() {
+        this.notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C5'];
+        this.line_notes = ['E (Mi)', 'G (Sol)', 'B (Si)', 'D (Re)', 'F (Fa)'];
+        this.space_notes = ['F (Fa)', 'A (La)', 'C (Do)', 'E (Mi)'];
+    }
 
-learnTheory() {
-let output = "=== BƯỚC 1: NỐT TRÊN DÒNG ===\n";
-this.line_notes.forEach((note, i) => {
-let distance = i > 0 ? "Cách 1 phím trắng" : "Nốt bắt đầu";
-output += `Dòng ${i+1}: ${note} -> ${distance}\n`;
-});
+    learnTheory() {
+        return `=== PHƯƠNG PHÁP DÒNG/KHE ===\n\n` +
+               `1. NỐT TRÊN DÒNG: ${this.line_notes.join(' - ')}\n` +
+               `-> Mẹo: Các nốt này cách nhau 1 phím trắng.\n\n` +
+               `2. NỐT TRONG KHE: ${this.space_notes.join(' - ')}\n` +
+               `-> Mẹo: Các nốt này cũng cách nhau 1 phím trắng.`;
+    }
 
-output += "\n=== BƯỚC 2: NỐT TRONG KHE ===\n";
-this.space_notes.forEach((note, i) => {
-let distance = i > 0 ? "Cách 1 phím trắng" : "Nốt bắt đầu";
-output += `Khe ${i+1}: ${note} -> ${distance}\n`;
-});
-
-return output;
-}
-
-moveFinger(current, next) {
-let start = this.notes.indexOf(current);
-let end = this.notes.indexOf(next);
-
-if (start === -1 || end === -1) {
-return "❌ Nốt không hợp lệ!";
-}
-
-let steps = end - start;
-
-let result = `\n[Phân tích]\n${current} → ${next}\n`;
-
-if (steps > 0) {
-result += `👉 Đi LÊN ${steps} phím`;
-} else if (steps < 0) {
-result += `👉 Đi XUỐNG ${Math.abs(steps)} phím`;
-} else {
-result += "👉 Giữ nguyên";
-}
-
-return result;
-}
+    moveFinger(current, next) {
+        let start = this.notes.indexOf(current.toUpperCase());
+        let end = this.notes.indexOf(next.toUpperCase());
+        if (start === -1 || end === -1) return "Nốt không hợp lệ (Dùng C, D, E, F, G, A, B)";
+        
+        let steps = end - start;
+        let result = `Từ ${current} sang ${next}:\n`;
+        if (steps > 0) result += `👉 Dịch lên ${steps} phím trắng.`;
+        else if (steps < 0) result += `👉 Dịch xuống ${Math.abs(steps)} phím trắng.`;
+        else result += `👉 Giữ nguyên vị trí.`;
+        return result;
+    }
 }
 
 const pianoAI = new PianoLearningAssistant();
-
-function showTheory() {
-alert(pianoAI.learnTheory());
-}
-
+function showTheory() { alert(pianoAI.learnTheory()); }
 function testMove() {
-let from = prompt("Nhập nốt (Do, Re, Mi...)");
-let to = prompt("Nhập nốt tiếp theo");
-alert(pianoAI.moveFinger(from, to));
+    let from = prompt("Nhập nốt hiện tại (C, D, E...):", "C");
+    let to = prompt("Nhập nốt tiếp theo trên bản nhạc:", "E");
+    if(from && to) alert(pianoAI.moveFinger(from, to));
 }
-</script>
+
+// --- PHẦN 3: ĐIỀU HƯỚNG TAB ---
+function showTab(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
 }
-</script>
-
-    <div id="dynamics-tab" class="section">
-        <div class="card">
-            <h2>Sắc thái về Lực hát (Dynamics)</h2>
-            <table>
-                <tr><th>Kí hiệu</th><th>Thuật ngữ</th><th>Ý nghĩa</th></tr>
-                <tr><td class="term">pp</td><td>Pianissimo</td><td>Rất nhỏ</td></tr>
-                <tr><td class="term">p</td><td>Piano</td><td>Nhỏ vừa</td></tr>
-                <tr><td class="term">mf</td><td>Mezzo forte</td><td>Mạnh vừa</td></tr>
-                <tr><td class="term">f</td><td>Forte</td><td>Mạnh, lớn</td></tr>
-                <tr><td class="term">ff</td><td>Fortissimo</td><td>Rất mạnh, lớn</td></tr>
-                <tr><td class="term">sotto voce</td><td>Thì thầm</td><td>Hát cực nhẹ bằng hơi</td></tr>
-                <tr><td class="term">< / ></td><td>Crescendo / Decrescendo</td><td>Lớn dần / Nhỏ dần</td></tr>
-            </table>
-        </div>
-        <div class="card">
-            <h2>Trường độ & Diễn đạt</h2>
-            <div class="grid">
-                <div class="info-box"><h4>Accelerando</h4><p>Tăng tốc dần (Ví dụ: Lúc cao trào bùng nổ).</p></div>
-                <div class="info-box"><h4>Andante</h4><p>Thong thả (Ví dụ: Nhịp đi bộ nhàn nhã).</p></div>
-                <div class="info-box"><h4>Affectuoso</h4><p>Dịu dàng (Ví dụ: Hát ru hoặc tình ca).</p></div>
-                <div class="info-box"><h4>Cantabile</h4><p>Du dương (Ví dụ: Chơi đàn như đang hát).</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div id="vocal-tab" class="section">
-        <div class="card">
-            <h2>Thanh nhạc chuyên sâu</h2>
-            <div class="grid">
-                <div class="info-box"><h4>Appoggio</h4><p>Nén hơi thở tại cơ hoành để giữ giọng ổn định.</p></div>
-                <div class="info-box"><h4>Passaggio</h4><p>Điểm chuyển giữa giọng ngực và giọng đầu.</p></div>
-                <div class="info-box"><h4>Resonance</h4><p>Sử dụng xoang mặt để tạo độ vang tự nhiên.</p></div>
-            </div>
-        </div>
-        <div class="card">
-            <h2>Phân loại giọng hát</h2>
-            <p>Soprano (Nữ cao), Tenor (Nam cao), Baritone (Nam trung), Bass (Nam trầm).</p>
-        </div>
-    </div>
-
-    <div id="theory-tab" class="section">
-        <div class="card">
-            <h2>1. Vòng tròn bậc 5 (Circle of Fifths)</h2>
-            <p>Quy luật xác định dấu hóa trên khuông nhạc.</p>
-            <div class="info-box">
-                <h4>Dấu Thăng (#) - Theo chiều kim đồng hồ</h4>
-                <p>Ví dụ: Giọng <span class="example">Sol trưởng (G)</span> có 1 dấu thăng (Fa#). Giọng <span class="example">Rê trưởng (D)</span> có 2 dấu thăng (Fa#, Đô#).</p>
-            </div>
-            <div class="info-box">
-                <h4>Dấu Giáng (b) - Ngược chiều kim đồng hồ</h4>
-                <p>Ví dụ: Giọng <span class="example">Pha trưởng (F)</span> có 1 dấu giáng (Sib). Giọng <span class="example">Si giáng trưởng (Bb)</span> có 2 dấu giáng (Sib, Mib).</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>2. Âm giai & Công thức (Scales)</h2>
-            <div class="info-box">
-                <h4>Âm giai Trưởng (Major Scale)</h4>
-                <p>Công thức: 1 - 1 - 1/2 - 1 - 1 - 1 - 1/2</p>
-                <p>Ví dụ Âm giai Đô trưởng (C): <span class="example">C - D - E - F - G - A - B - C</span> (Không có dấu hóa).</p>
-            </div>
-            <div class="info-box">
-                <h4>Âm giai Thứ tự nhiên (Natural Minor Scale)</h4>
-                <p>Công thức: 1 - 1/2 - 1 - 1 - 1/2 - 1 - 1</p>
-                <p>Ví dụ Âm giai La thứ (Am): <span class="example">A - B - C - D - E - F - G - A</span>.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <h2>3. Quãng & Hợp âm (Intervals & Chords)</h2>
-            <div class="info-box">
-                <h4>Quãng Tritone (Quãng 4 tăng)</h4>
-                <p>Âm thanh căng thẳng, kịch tính. Ví dụ: Từ nốt <span class="example">C đến F#</span>.</p>
-            </div>
-            <div class="info-box">
-                <h4>Hợp âm 7 (7th Chords)</h4>
-                <p>Hợp âm 3 nốt + nốt bậc 7. Ví dụ: Hợp âm Đô trưởng 7 (Cmaj7) gồm <span class="example">C - E - G - B</span>.</p>
-            </div>
-            <div class="info-box">
-                <h4>Hợp âm Át (Dominant 7th)</h4>
-                <p>Tạo lực hút về chủ âm. Ví dụ: Hợp âm Sol 7 (G7) <span class="example">G - B - D - F</span> hút về nốt Đô (C).</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<footer>&copy; 2026 Music Master Academy | Kiến thức Âm nhạc Trọn đời</footer>
-
-<script>
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let targetNote = null;
-    function playNote(freq) {
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-        gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1);
-        osc.connect(gain); gain.connect(audioCtx.destination);
-        osc.start(); osc.stop(audioCtx.currentTime + 1);
-    }
-    function startEarTest() {
-        const keys = document.querySelectorAll('.key');
-        const randomKey = keys[Math.floor(Math.random() * keys.length)];
-        targetNote = randomKey.dataset.note;
-        playNote(randomKey.dataset.freq);
-        document.getElementById('game-msg').innerText = "Đang phát... Bấm nốt bạn vừa nghe!";
-    }
-    document.querySelectorAll('.key').forEach(key => {
-        key.addEventListener('mousedown', () => {
-            playNote(key.dataset.freq);
-            key.classList.add('active');
-            if (targetNote) {
-                if (key.dataset.note === targetNote) {
-                    document.getElementById('game-msg').innerText = "Chính xác! 🎉";
-                    targetNote = null;
-                } else {
-                    document.getElementById('game-msg').innerText = "Sai rồi! Thử lại ❌";
-                }
-            }
-        });
-        key.addEventListener('mouseup', () => key.classList.remove('active'));
-    });
-    function showTab(id) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        event.currentTarget.classList.add('active');
-    }
 </script>
 </body>
 </html>
